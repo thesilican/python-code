@@ -25,7 +25,7 @@ if selected < 0 or selected >= len(modules):
 # Now import
 SolveCase = importlib.import_module(modules[selected].replace(".py", "")).SolveCase
 # Change the name of the module to change to different solvers:
-FILENAME = "FILENAME HERE.in"
+FILENAME = "A-large-practice.in"
 
 f = open(FILENAME)
 cases = int(f.readline())
