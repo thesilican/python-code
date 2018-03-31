@@ -1,5 +1,6 @@
 import random
 import pickle
+from constants import *
 
 
 class VirtualPet:
@@ -10,12 +11,22 @@ class VirtualPet:
 
     def __init__(self):
         """Initialize the virtual pet"""
-        self.Happiness = 0
-        self.Hunger = 0
-        self.Health = 0
-        self.Weight = 0
-        self.LifePoints = 100
+        # Variable format:
+        # [lifePoints, happiness, hunger, health, weight, poop]
+        self._vars = []
         pass
+
+    @property
+    def Happiness(self) -> int:
+        try:
+            return self._vars[1]
+        except IndexError:
+            pass
+        return
+
+    @Happiness.setter
+    def Happiness(self, value: int):
+        return
 
     # ---------- Tick things ----------
     def tick(self):
