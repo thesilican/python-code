@@ -36,3 +36,5 @@ VARIABLES_INIT = [LIFEPOINTS_INIT, HAPPINESS_INIT,
 
 class PetTypes(Enum):
     CAT = 0
+
+#---------- Random Config ----------

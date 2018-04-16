@@ -21,6 +21,11 @@ class VirtualPet:
         """Creates a new virtual pet with initial settings"""
         self._pet_vars = const.VARIABLES_INIT.copy()
         self.age = 0
+        # Some private use vars
+        self._poop_sub = 0
+        self._poop_sub_MAX = 5
+        self._health_prev_visit = 0
+        self._hunger_prev_feed = 0
 
     def get_var(self, index: int) -> int:
         return self._pet_vars[index]
@@ -41,16 +46,24 @@ class VirtualPet:
 
         # Do things like slowly decrease Happiness, Health, Weight
         # Increase hunger
+        # Randomly increase poop
+        self._tick_poop()
         pass
 
     def _tick_poop(self):
-        if random.randint(1, 20) == 1:
-            self.change_var(POOP, 1)
+        if random.randint(1, 5) == 1:
+            self._poop_sub += 1
+            if self._poop_sub >= self._poop_sub_MAX:
+                self._poop_sub = 0
+                self.change_var(POOP, 1)
+
+        # Decrease health & happiness with poop buildup
 
         # ---------- Player actions ----------
     def feed(self):
         """Feed your pet periodically to keep him from going hungry!
         Feeding him too fast, however, may cause him to grow overweight
+        And possibly somewhat spoiled
         """
 
         pass
@@ -72,8 +85,32 @@ class VirtualPet:
 
     def visit_doctor(self):
         """Pets don't always like checkups, but it's necissary for your pet's health!
+        Having a checkup more than 48 * 3 ticks is good
+        Having one between 48 * 3 - 48 * 1 is ok, but it will be less effective and your pet will not be happy
+        Having one in less than 48 * 1 is bad
         """
+        elapsed = self.age - self._health_prev_visit
+        self._health_prev_visit = self.age
 
+        if elapsed < 48:
+            r = random.randint(3, 5)
+            self.change_var(HEALTH, r * 5)
+            self.change_var(HAPPINESS, -10)
+        elif 144 > elapsed >= 48:
+            r = random.randint(1, 2)
+            self.change_var(HEALTH, r * 5)
+            self.change_var(HAPPINESS, -20)
+        else:
+            self.change_var(HAPPINESS, -30)
+        pass
+
+    def train(self) -> bool:
+        """Train your pet to be more disciplined
+        Might not always be fun, but its for the better
+
+        Returns:
+            bool -- trained successfully
+        """
         pass
 
     def clean_poop(self) -> bool:
