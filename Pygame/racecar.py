@@ -17,7 +17,7 @@ gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('A bit Racey')
 clock = pygame.time.Clock()
 
-carImg = pygame.image.load('car.bmp')
+carImg = pygame.image.load('Pygame/car.bmp')
 def things(thingx, thingy, thingw, thingh, color):
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
 def car(x,y):
