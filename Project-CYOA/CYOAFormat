@@ -1,0 +1,25 @@
+## Hello and welcome to a demonstration of the CYOA file format
+## First of all, any line begining with '##' is 
+## always ignored, as if it wasn't there (i.e. Comments)
+##
+## All files begin with the header shown below
+## Following are some meta info tags, all strings after the ':'
+#----CYOA----
+version:0.9
+author: John Doe
+##     ^ also valid
+## Whitespaces are simply ignored in the meta
+
+
+## Each story is broken into "pages"
+## Each pages has a header, with a name
+## 		The name must only consist of alphanumeric characters (case sensitive)
+## Lets begin our example!
+
+
+#Page1
+Welcome to the test of the CYOA format
+We hope you enjoy your time here
+
+> Continue {page2}
+#Page2
