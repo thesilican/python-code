@@ -1,0 +1,1 @@
+Get-Content .\testinput.in | python.exe "problem3.py"

@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 "./Practice Session 2018/problem4.py" < testinput.in
+python3 $1 < test.in > test.out
