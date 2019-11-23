@@ -1,7 +1,15 @@
 from typing import List
 from math import sqrt, ceil
 
-def getFactors(number: int, sort: bool = True) -> List[int]:
+def getDivisors(number: int, sort: bool = True) -> List[int]:
+  """Get all the divisors of a number
+
+  Example: getDivisors(12) -> [1, 2, 3, 4, 6, 12]
+
+  Arguments:
+    number {int} -- The number to find divisors of
+    sort {bool} -- Whether or not to sort the returned divisors
+  """
   factors = set()
   for i in range(1, ceil(sqrt(number)) + 1):
     if number % i == 0:
@@ -12,11 +20,24 @@ def getFactors(number: int, sort: bool = True) -> List[int]:
   else:
     return list(factors);
 
+def getProperDivisors(number: int, sort: bool = True) -> List[int]:
+  """Get all the divisors less than number.
+  Similar to getDivisors except only for numbers less than the number
+
+  Example: getProperDivisors(12) -> [1, 2, 3, 4, 6]
+  Arguments:
+    number {int} -- The number to find divisors of
+    sort {bool} -- Whether or not to sort the returned divisors
+  """
+  res = getDivisors(number, sort)
+  res.remove(number)
+  return res
+
 if __name__ == "__main__":
-    print(getFactors(12))
-    print(getFactors(1000))
-    print(getFactors(112123123412345))
-    print(getFactors(112123123412345123456))
+    print(getDivisors(12))
+    print(getDivisors(1000))
+    print(getDivisors(112123123412345, True))
+    print(getDivisors(112123123412345123456))
 
 
 # Triangle Numbers
