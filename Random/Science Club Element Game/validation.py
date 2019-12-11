@@ -2,7 +2,7 @@ one_letter = []
 two_letter = []
 scrabble_words = []
 
-with open("elements.csv", "r") as f:
+with open("data_elements", "r") as f:
     lines = [x.split(",")[1].strip() for x in f.readlines()]
     for l in lines:
         if len(l) == 1:
@@ -10,10 +10,11 @@ with open("elements.csv", "r") as f:
         else:
             two_letter.append(l)
 
-with open("dictionary.txt", "r") as f:
+with open("data_dictionary", "r") as f:
     scrabble_words = [x.strip().lower() for x in f.readlines()]
 
 def validateWord(word):
+    print(word)
     if len(word) == 0:
         return True
     for el in one_letter:
