@@ -1,67 +1,55 @@
-one_letter = []
-two_letter = []
-scrabble_words = []
+#!/usr/bin/env python3
+from validation import validateWord, isScrabbleWord
 
-with open("elements.csv", "r") as f:
-    lines = [x.split(",")[1].strip() for x in f.readlines()]
-    for l in lines:
-        if len(l) == 1:
-            one_letter.append(l)
-        else:
-            two_letter.append(l)
+# Enter filenames
+fileTexts = []
 
-with open("dictionary.txt", "r") as f:
-    scrabble_words = [x.strip().lower() for x in f.readlines()]
+while True:
+    print("Enter a txt filename of words: ", end="")
+    filename = input()
+    if filename == "":
+        break
+    try:
+        # Open and read file
+        with open(filename + ".txt", "r") as f:
+            lines = f.readlines()
+            # De-duplicate
+            words = list(set([x.lower().strip() for x in lines]))
+        print("    " + filename + ".txt successfully loaded")
+        print("    " + str(len(words)) + " words found")
 
-def validateWord(word):
-    if len(word) == 0:
-        return True
-    for el in one_letter:
-        if word.lower().startswith(el.lower()):
-            if validateWord(word[1:]):
-                return True
-    if len(word) == 1:
-        return False
-    for el in two_letter:
-        if word.lower().startswith(el.lower()):
-            if validateWord(word[2:]):
-                return True
-    return False
+        # Validate words
+        validWords = list(filter(validateWord, filter(isScrabbleWord, words)))
+        print("    " + str(len(validWords)) + " valid words found")
+        print("    Invalid words: ")
+        invalidWords = list(set(words) - set(validWords))
+        for w in invalidWords:
+            print("        " + w)
+        fileTexts.append([filename, tuple(validWords) , len(validWords), len(invalidWords)])
+    except FileNotFoundError:
+        print("File " + filename + ".txt not found")
+        continue
 
+# Remove duplicates
+for i, submission in enumerate(fileTexts):
+    this = set(submission[1])
+    others = set()
+    for j, other in enumerate(fileTexts):
+        if i == j:
+            continue
+        others.update(other[1])
+    diff = this - others
+    submission.append(len(diff))
+    submission.append(diff)
+    print(submission[0], "has", len(diff), "unique terms")
 
-def isScrabbleWord(word):
-    def binarySearch(min_, max_):
-        mid = (max_-min_)//2 + min_
-        if scrabble_words[mid] == word.lower():
-            return True
-        elif min_ >= max_:
-            return False
-        else:
-            if word.lower() > scrabble_words[mid]:
-                return binarySearch(mid + 1, max_)
-            else:
-                return binarySearch(min_, mid - 1)
-    return binarySearch(0, len(scrabble_words) - 1)
+def sortByUnique(val):
+    return val[4]
 
+fileTexts.sort(key=sortByUnique, reverse=True)
 
-if __name__ == "__main__":
-    while True:
-        print("Enter a filename of words: ", end="")
-        filename = input()
-        validwords = []
-        invalidwords = []
-        with open(filename, "r") as f:
-            lines = [x.lower().strip() for x in f.readlines()]
-            for word in lines:
-                isValid = validateWord(word)
-                isScrabble = isScrabbleWord(word)
-                if isValid and isScrabble:
-                    validwords.append(word)
-                else:
-                    invalidwords.append(word)
-        print("Number of valid words found:", len(validwords))
-        print("---------- Valid words: ----------")
-        for word in validwords:
-            print(word)
-        print("---------- Invalid words: ----------")
-
+print("\n\n\n---------- Results ----------")
+for i, submission in enumerate(fileTexts):
+    print(str(i + 1) + ")", submission[0],"-",submission[4],"unique words:")
+    print("    " + ", ".join(sorted(submission[5])))
+    print("-"*29)
