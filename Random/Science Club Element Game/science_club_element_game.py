@@ -25,7 +25,8 @@ while True:
         invalidWords = list(set(words) - set(validWords))
         for w in invalidWords:
             print("        " + w)
-        fileTexts.append([filename, tuple(validWords) , len(validWords), len(invalidWords)])
+        fileTexts.append([filename, tuple(validWords),
+                          len(validWords), len(invalidWords)])
     except FileNotFoundError:
         print("File " + filename + ".txt not found")
         continue
@@ -43,13 +44,18 @@ for i, submission in enumerate(fileTexts):
     submission.append(diff)
     print(submission[0], "has", len(diff), "unique terms")
 
-def sortByUnique(val):
-    return val[4]
+# Calculate score
+def calcScore(words):
+    return sum([len(x) for x in words])
 
-fileTexts.sort(key=sortByUnique, reverse=True)
+for submission in fileTexts:
+    submission.append(calcScore(submission[5]))
+
+fileTexts.sort(key=lambda val: val[6], reverse=True)
 
 print("\n\n\n---------- Results ----------")
 for i, submission in enumerate(fileTexts):
-    print(str(i + 1) + ")", submission[0],"-",submission[4],"unique words:")
-    print("    " + ", ".join(sorted(submission[5])))
+    print(str(i + 1) + ")", submission[0], "-",
+          submission[6], "points (" + str(submission[4]) + " unique words)")
+    print("    " + " ".join(sorted(submission[5])))
     print("-"*29)
