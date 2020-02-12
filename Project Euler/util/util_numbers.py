@@ -18,7 +18,7 @@ def getDivisors(number: int, sort: bool = True) -> List[int]:
   if sort:
     return sorted(factors)
   else:
-    return list(factors);
+    return list(factors)
 
 def getProperDivisors(number: int, sort: bool = True) -> List[int]:
   """Get all the divisors less than number.
