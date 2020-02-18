@@ -4,11 +4,13 @@ import random
 import re
 obj = json.loads(open("en_US.json", "r").read())
 
+acc = 0
 for key, val in obj.items():
     matches = re.findall("\\{\\d\\}", val)
     matchStr = " ".join(matches)
     words = ["UwU", "OwO", "Nya"]
-    obj[key] = (matchStr + " " + random.choice(words)).strip()
+    obj[key] = (matchStr + " " + words[acc % 3]).strip()
+    acc += 1
     print(obj[key])
 
 obj["language"] = "Languwuage"
