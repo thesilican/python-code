@@ -1,4 +1,4 @@
-def case(caseNum):        
+def case(caseNum):
     print("Case #{}: ".format(caseNum))
 
 
