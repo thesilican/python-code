@@ -1,4 +1,4 @@
-from util.util_primes import isPrime
+from util.primes import isPrime
 
 # Try all
 mx = 0

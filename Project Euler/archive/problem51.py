@@ -1,4 +1,4 @@
-import primetools
+import util.primes
 
-for i in primetools.generatePrimes(1000000):
+for i in util.primes.generatePrimes(1000000):
     print(i)

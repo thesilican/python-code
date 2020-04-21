@@ -1,2 +1,2 @@
-from util.util_primes import generatePrimes
+from util.primes import generatePrimes
 print(sum(generatePrimes(2000000)))

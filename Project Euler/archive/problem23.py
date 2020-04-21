@@ -1,4 +1,4 @@
-from util.util_numbers import getProperDivisors
+from util.numbers import getProperDivisors
 from math import copysign
 
 numDict = dict()

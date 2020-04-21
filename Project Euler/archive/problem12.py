@@ -1,4 +1,4 @@
-from util.util_numbers import triangleNums, getDivisors
+from util.numbers import triangleNums, getDivisors
 
 for num in triangleNums(0):
   numFactors = getDivisors(num)

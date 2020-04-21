@@ -1,4 +1,4 @@
-from util_numbers import getDivisors
+from util.numbers import getDivisors
 
 amical = []
 for i in range(2, 10001):

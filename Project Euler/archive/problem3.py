@@ -1,5 +1,5 @@
 import math
-from util.util_primes import isPrime
+from util.primes import isPrime
 number = 600851475143
 sqrtNum = math.ceil(math.sqrt(number))
 
