@@ -1,11 +1,23 @@
-class Solution:
-    def singleNumber(self, nums) -> int:
-        d = {}
-        for n in nums:
-            if (n in d):
-                del d[n]
-            else:
-                d[n] = True
-        return list(d.keys())[0]
+badVersion = [0] + [False for _ in range(1)] + [True for _ in range(1)]
 
-print(Solution().singleNumber([1,1,17,2,3,4,2,3,4]))
+
+def isBadVersion(n):
+    return badVersion[n]
+
+
+class Solution:
+    def firstBadVersion(self, n):
+        if isBadVersion(1):
+            return 1
+        minRange = 1
+        maxRange = n
+        while maxRange - minRange > 1:
+            mid = (maxRange + minRange) // 2
+            if isBadVersion(mid):
+                maxRange = mid
+            else:
+                minRange = mid
+        return maxRange
+
+
+print(Solution().firstBadVersion(len(badVersion) - 1))
