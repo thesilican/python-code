@@ -1,0 +1,1 @@
+e=chr(33);q=chr(34);a="e=chr(33);q=chr(34);a=!;b=a.replace(e,q+a+q);print(chr(10).join([''.join([str(b[x+y*5])for y in range(51)])for x in range(5)]))";b=a.replace(e,q+a+q);print(chr(10).join([''.join([str(b[x+y*5])for y in range(51)])for x in range(5)]))

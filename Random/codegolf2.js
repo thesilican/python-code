@@ -1,0 +1,1 @@
+print("California,Florida,Georgia,Illinois,Indiana,Michigan,New York,Ohio,Pennsylvania,Texas,Utah,Virginia")
