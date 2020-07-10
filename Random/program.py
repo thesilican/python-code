@@ -1,15 +1,45 @@
-t = """e(q(ac3c4!.a,qih)n.((yf a5f a5".a,qih)n.((yf a5f a5
-=3=3=h)h);rcq)nr.(j[b*oin1oin);rcq)nr.(j[b*oin1oin)
-c3c4"r;r;bee+;t(j[os[5rng)rng]bee+;t(j[os[5rng)rng]
-h)h)e(q(a=p(ap(1o'itx]  e]  e)=p(ap(1o'itx]  e]  e)
-r;r;=3=3=ale+rc0i'nr+)yr()xr()ale+rc0i'nr+)yr()xr()"""
-arr = []
-for line in t.split("\n"):
-    a = []
-    for c in line:
-        a.append(c)
-    arr.append(a)
+filesystem = {}
+pwdPath = []
+pwd = filesystem
 
-for x in range(len(arr[0])):
-    for y in range(len(arr)):
-        print(arr[y][x], end="")
+for _ in range(int(input())):
+    try:
+        args = input().split()
+        a = args[0]
+        b = args[1]
+        if a == "cd":
+            x = pwdPath[:]
+            for p in b.split("/"):
+                if p == "..":
+                    x.pop()
+                else:
+                    x.append(p)
+                d=filesystem
+                for c in x:
+                    d = d[c]
+                    if type(d)!=type({}):
+                        raise d
+            pwd = d
+            pwdPath = x
+        if a == "mkdir" and b not in pwd:
+            pwd[b] = {}
+        if a == "touch" and b not in pwd:
+            pwd[b] = 1
+        if a == "rm":
+            if b in pwd and pwd[b]:
+                del pwd[b]
+            if b == "-r":
+                del pwd[args[2]]
+    except:pass
+
+print("/")
+
+
+def show(d, depth=1):
+    for k, v in d.items():
+        print(" "*depth, k)
+        if v!=1:
+            show(v, depth+1)
+
+
+show(filesystem)

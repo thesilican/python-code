@@ -1,0 +1,4 @@
+3
+mkdir foo
+cd bar/../foo
+touch file.txt
