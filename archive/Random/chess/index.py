@@ -2,7 +2,7 @@ import math
 import chess
 from stockfish import Stockfish
 
-MOVE_DEPTH = 24
+MOVE_DEPTH = 18
 
 # -- Weird 1 --
 # STARTING_FEN = "QQQQQQQQ/PPPPPPPP/rnbqkbnr/pppppppp/PPPPPPPP/RNBQKBNR/pppppppp/qqqqqqqq w - - 0 1"
@@ -13,7 +13,9 @@ MOVE_DEPTH = 24
 # -- Standard --
 # STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 # -- Standard Upsidedown --
-STARTING_FEN = "RNBQKBNR/PPPPPPPP/8/8/8/8/pppppppp/rnbqkbnr w - - 0 1"
+# STARTING_FEN = "RNBQKBNR/PPPPPPPP/8/8/8/8/pppppppp/rnbqkbnr w - - 0 1"
+# -- Chess but good https://www.youtube.com/watch?v=PTcvbDbVbtM&t=185s --
+STARTING_FEN = "Q2nB3/Pp1pp1PP/1P1rR2P/3PppP1/q2bKpN1/Rrp1N1P1/B1pk4/2b3n1 w - - 0 1"
 
 # Stockfish vs Stockfish
 
@@ -44,6 +46,7 @@ while state == "*":
     fen = board.fen()
     print(board.unicode(invert_color=True, empty_square=" "))
     state = board.result()
+    print(f"State: {state}")
 
 san_board = chess.Board(STARTING_FEN)
 moves = san_board.variation_san(board.move_stack)
