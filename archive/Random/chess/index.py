@@ -11,11 +11,11 @@ MOVE_DEPTH = 18
 # -- King Queen vs King Pawn --
 # STARTING_FEN = "8/6P1/5K2/8/8/8/1q6/1k6 w - - 0 1"
 # -- Standard --
-# STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 # -- Standard Upsidedown --
 # STARTING_FEN = "RNBQKBNR/PPPPPPPP/8/8/8/8/pppppppp/rnbqkbnr w - - 0 1"
 # -- Chess but good https://www.youtube.com/watch?v=PTcvbDbVbtM&t=185s --
-STARTING_FEN = "Q2nB3/Pp1pp1PP/1P1rR2P/3PppP1/q2bKpN1/Rrp1N1P1/B1pk4/2b3n1 w - - 0 1"
+# STARTING_FEN = "Q2nB3/Pp1pp1PP/1P1rR2P/3PppP1/q2bKpN1/Rrp1N1P1/B1pk4/2b3n1 w - - 0 1"
 
 # Stockfish vs Stockfish
 
